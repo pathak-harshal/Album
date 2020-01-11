@@ -5,6 +5,9 @@ abstract class TrackEntityDao {
   @Query('SELECT * FROM TrackEntity')
   Future<List<TrackEntity>> findAllTracks();
 
+  @Query('SELECT * FROM TrackEntity WHERE collectionId = :collectionId')
+  Future<List<TrackEntity>> collectionWiseTracks(int collectionId);
+
   @insert
-  Future<void> insertTrack(TrackEntity entity);
+  Future<bool> insertTrack(List<TrackEntity> entityList);
 }
