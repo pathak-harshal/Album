@@ -1,6 +1,5 @@
 import 'package:albums/entity/track_entity.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class TrackListPage extends StatefulWidget {
   TrackListPage({Key key, this.collectionName, this.tracksList})

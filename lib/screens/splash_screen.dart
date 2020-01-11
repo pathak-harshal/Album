@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:albums/custom_widget/platform_alert_dialog.dart';
 import 'package:albums/dao/artist_entity_dao.dart';
 import 'package:albums/dao/collection_entity_dao.dart';
 import 'package:albums/dao/track_entity_dao.dart';
@@ -10,6 +11,7 @@ import 'package:albums/entity/collection_entity.dart';
 import 'package:albums/entity/track_entity.dart';
 import 'package:albums/entity/track_list_api_response.dart';
 import 'package:albums/screens/artist_page.dart';
+import 'package:albums/util/connection_detector.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -43,7 +45,21 @@ class _SplashScreenState extends State<SplashScreen> {
     });
 
     // context = context;
-    startTime();
+    startTheProcess();
+  }
+
+  void startTheProcess() async {
+    bool isAvailable = await ConnectionDetector.checkInternetConnection();
+    if (isAvailable) {
+      startTime();
+    } else {
+      PlatformAlertDialog(
+        title: 'No Internet Connection',
+        content:
+            'Internet Connection is not available, Please close the app check the Internet Connection and Restart the app again',
+        defaultActionText: 'Ok',
+      ).show(context);
+    }
   }
 
   @override
